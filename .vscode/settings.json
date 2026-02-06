@@ -30,5 +30,8 @@
   "emmet.showExpandedAbbreviation": "never",
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit"
+  },
+  "files.readonlyInclude": {
+    "**/*": true
   }
 }
