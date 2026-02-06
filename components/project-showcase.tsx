@@ -17,6 +17,7 @@ const projects: Project[] = [
     alt: "Lyovson crest logo",
     description:
       "Personal portfolio and blog featuring design insights and projects",
+    logoClassName: "brightness-0 invert",
   },
   {
     name: "Avenews",
