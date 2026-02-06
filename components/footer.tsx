@@ -2,20 +2,20 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 py-10 text-center sm:flex-row sm:justify-between sm:text-left">
-        <div className="flex items-center gap-3">
+    <footer className="shrink-0 border-t border-border">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
+        <div className="flex items-center gap-2">
           <Image
             alt="Roadcorp logo"
-            height={24}
+            height={16}
             src="/logos/roadcorp-logo-dark.png"
-            width={24}
+            width={16}
           />
-          <span className="text-sm font-medium text-foreground">
+          <span className="text-xs font-medium text-foreground">
             Roadcorp
           </span>
         </div>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-[10px] text-muted-foreground sm:text-xs">
           {"The Road to Infinity"}
         </p>
       </div>

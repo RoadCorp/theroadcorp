@@ -4,8 +4,8 @@ import { ProjectShowcase } from "@/components/project-showcase";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      <main>
+    <div className="flex h-dvh w-dvw flex-col overflow-hidden">
+      <main className="flex flex-1 flex-col">
         <Hero />
         <ProjectShowcase />
       </main>

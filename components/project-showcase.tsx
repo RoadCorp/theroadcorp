@@ -32,10 +32,10 @@ export function ProjectShowcase() {
   const duplicated = [...projects, ...projects];
 
   return (
-    <section className="py-20 sm:py-28" id="work">
+    <section className="shrink-0 pb-6 sm:pb-8" id="work">
       {/* Section heading */}
-      <div className="mx-auto mb-14 max-w-2xl px-6 text-center sm:mb-20">
-        <h2 className="fade-up font-serif text-2xl font-normal tracking-wide text-foreground text-balance sm:text-3xl">
+      <div className="mx-auto mb-4 px-6 text-center sm:mb-6">
+        <h2 className="fade-up text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
           Our Work
         </h2>
       </div>
@@ -45,7 +45,7 @@ export function ProjectShowcase() {
         {/* Edge fades */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 sm:w-40"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-32"
           style={{
             background:
               "linear-gradient(to right, var(--background), transparent)",
@@ -53,7 +53,7 @@ export function ProjectShowcase() {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 sm:w-40"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-32"
           style={{
             background:
               "linear-gradient(to left, var(--background), transparent)",
@@ -61,7 +61,7 @@ export function ProjectShowcase() {
         />
 
         <div aria-label="Featured projects" role="region">
-          <ul className="marquee-track gap-6 px-6 py-4 sm:gap-8">
+          <ul className="marquee-track gap-4 px-4 py-3 sm:gap-6 sm:px-6">
             {duplicated.map((project, idx) => {
               const isClone = idx >= projects.length;
               return (
