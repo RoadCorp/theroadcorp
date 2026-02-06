@@ -13,10 +13,11 @@ const projects: Project[] = [
   {
     name: "Lyovson.com",
     href: "https://www.lyovson.com",
-    logo: "/logos/crest-light-simple.webp",
+    logo: "/logos/crest-dark-simple.png",
     alt: "Lyovson crest logo",
     description:
       "Personal portfolio and blog featuring design insights and projects",
+    logoClassName: "invert",
   },
   {
     name: "Avenews",

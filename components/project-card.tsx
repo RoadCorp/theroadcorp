@@ -7,6 +7,7 @@ export type Project = {
   logo: string;
   alt: string;
   description: string;
+  logoClassName?: string;
 };
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -27,7 +28,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="flex size-10 items-center justify-center rounded-lg border border-border bg-secondary/50 p-2 transition-colors duration-300 group-hover:border-foreground/10 sm:size-12 sm:p-2.5">
         <Image
           alt={project.alt}
-          className={`size-full object-contain ${project.name === "Avenews" ? "invert" : ""}`}
+          className={`size-full object-contain ${project.logoClassName ?? ""}`}
           height={40}
           loading="lazy"
           src={project.logo}
