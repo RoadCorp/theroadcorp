@@ -99,10 +99,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f0ea" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1612" },
-  ],
+  themeColor: "#151519",
 };
 
 export default function RootLayout({
@@ -111,7 +108,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html dir="ltr" lang="en">
+    <html className="dark" dir="ltr" lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}
       >

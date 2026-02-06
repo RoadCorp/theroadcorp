@@ -2,38 +2,28 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center px-6 pt-32 pb-16 text-center sm:pt-40 sm:pb-24 lg:pt-48 lg:pb-32">
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-10 sm:gap-14">
+    <section className="flex flex-col items-center justify-center px-6 pt-28 pb-20 text-center sm:pt-36 sm:pb-28 lg:pt-44 lg:pb-36">
+      <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-12 sm:gap-16">
         {/* Logo */}
-        <div className="scale-in">
+        <div className="scale-in logo-glow">
           <Image
             alt="Roadcorp logo"
-            className="drop-shadow-sm"
-            height={160}
+            height={140}
             priority
-            sizes="(max-width: 640px) 120px, 160px"
-            src="/logos/roadcorp-logo-light.png"
-            width={160}
+            sizes="(max-width: 640px) 100px, 140px"
+            src="/logos/roadcorp-logo-dark.png"
+            width={140}
           />
         </div>
 
         {/* Motto */}
-        <div className="stagger-children flex flex-col items-center gap-6">
-          <h1 className="font-serif text-5xl font-medium leading-tight tracking-tight text-balance sm:text-7xl sm:leading-[1.05] lg:text-8xl lg:leading-[1.02]">
-            The Road to Infinity
-          </h1>
-          <p className="max-w-md text-lg leading-relaxed text-muted-foreground sm:max-w-lg sm:text-xl">
-            Building innovative products and solutions. Designing, shipping,
-            iterating.
-          </p>
-        </div>
+        <h1 className="fade-up font-serif text-3xl font-normal leading-snug tracking-wide text-foreground text-balance sm:text-4xl lg:text-5xl lg:leading-snug [animation-delay:0.2s]">
+          The Road to Infinity
+        </h1>
 
         {/* Scroll indicator */}
-        <div className="fade-in mt-4 flex flex-col items-center gap-2 [animation-delay:0.8s]">
-          <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-            Our Work
-          </span>
-          <div className="h-10 w-px bg-border" />
+        <div className="fade-in flex flex-col items-center gap-3 [animation-delay:0.6s]">
+          <div className="h-12 w-px bg-foreground/15" />
         </div>
       </div>
     </section>

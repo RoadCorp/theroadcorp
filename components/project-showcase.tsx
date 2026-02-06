@@ -5,7 +5,7 @@ const projects: Project[] = [
   {
     name: "Bagaran Agency",
     href: "https://www.bagaranagency.com",
-    logo: "/logos/bagaran-dark.webp",
+    logo: "/logos/bagaran-light.webp",
     alt: "Bagaran Agency logo",
     description:
       "Creative digital agency specializing in brand identity and web development",
@@ -13,7 +13,7 @@ const projects: Project[] = [
   {
     name: "Lyovson.com",
     href: "https://www.lyovson.com",
-    logo: "/logos/crest-dark-simple.png",
+    logo: "/logos/crest-light-simple.webp",
     alt: "Lyovson crest logo",
     description:
       "Personal portfolio and blog featuring design insights and projects",
@@ -29,18 +29,14 @@ const projects: Project[] = [
 ];
 
 export function ProjectShowcase() {
-  // Duplicate for seamless infinite scroll
   const duplicated = [...projects, ...projects];
 
   return (
-    <section className="py-16 sm:py-24" id="work">
+    <section className="py-20 sm:py-28" id="work">
       {/* Section heading */}
-      <div className="mx-auto mb-12 max-w-2xl px-6 text-center sm:mb-16">
-        <span className="mb-4 inline-block text-xs font-medium uppercase tracking-widest text-muted-foreground">
-          Featured Projects
-        </span>
-        <h2 className="font-serif text-3xl font-medium tracking-tight text-balance sm:text-5xl">
-          Crafting digital experiences
+      <div className="mx-auto mb-14 max-w-2xl px-6 text-center sm:mb-20">
+        <h2 className="fade-up font-serif text-2xl font-normal tracking-wide text-foreground text-balance sm:text-3xl">
+          Our Work
         </h2>
       </div>
 
@@ -49,7 +45,7 @@ export function ProjectShowcase() {
         {/* Edge fades */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-32"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 sm:w-40"
           style={{
             background:
               "linear-gradient(to right, var(--background), transparent)",
@@ -57,7 +53,7 @@ export function ProjectShowcase() {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-32"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 sm:w-40"
           style={{
             background:
               "linear-gradient(to left, var(--background), transparent)",
