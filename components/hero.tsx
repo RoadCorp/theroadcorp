@@ -1,26 +1,27 @@
-import Image from "next/image";
+import { MARK, MarkSky } from "@/components/roadcorp-mark";
 
+// The RoadCorp logo at page scale: the ring and the Raidho rune rise over a
+// planet whose horizon spans the page, with the wordmark and motto below it.
+// The planet is the mark's own planet circle, scaled with the ring (see the
+// .scene rules in globals.css).
 export function Hero() {
   return (
-    <section className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-      <div className="flex flex-col items-center gap-8 sm:gap-10">
-        {/* Logo */}
-        <div className="scale-in logo-glow">
-          <Image
-            alt="Roadcorp logo"
-            className="h-20 w-20 sm:h-28 sm:w-28 lg:h-32 lg:w-32"
-            height={128}
-            priority
-            src="/logos/roadcorp-logo-dark.png"
-            width={128}
-          />
-        </div>
-
-        {/* Motto */}
-        <h1 className="fade-up font-serif text-2xl font-normal leading-snug tracking-wide text-foreground text-balance sm:text-3xl lg:text-4xl [animation-delay:0.2s]">
-          The Road to Infinity
-        </h1>
+    <header className="scene">
+      <div className="scene-sky">
+        <svg
+          aria-hidden="true"
+          className="scene-mark"
+          viewBox={MARK.skyViewBox}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <MarkSky id="hero-mark" />
+        </svg>
       </div>
-    </section>
+      <div aria-hidden="true" className="scene-planet" />
+      <div className="scene-lockup">
+        <h1 className="scene-wordmark">RoadCorp</h1>
+        <p className="scene-motto">The Road to Infinity</p>
+      </div>
+    </header>
   );
 }
