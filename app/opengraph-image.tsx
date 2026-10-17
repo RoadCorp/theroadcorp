@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { RAIDHO_PATH, RING_VIEWBOX } from "@/components/roadcorp-mark";
 
 export const alt = "RoadCorp: The Road to Infinity";
 export const size = {
@@ -10,19 +11,20 @@ export const contentType = "image/png";
 const SKY = "#0e1630";
 const GROUND = "#080d1c";
 const INK = "#eef0f6";
+const HAZE = "#8e98b5";
 
 // The homepage hero at a fixed size, using the same ratios as the .scene
 // rules in globals.css: every measure is a share of the ring diameter.
 const RING = 420;
-const RING_TOP = 80;
+const RING_TOP = 60;
 const RING_LEFT = (size.width - RING) / 2;
 const RING_STROKE = 39; // 0.092 of the ring
-const MOTTO_SIZE = 44; // 0.105 of the ring
-const MOTTO_LIFT = 29; // 0.07 of the ring
 const HORIZON_HEIGHT = 101; // 0.24 of the ring
-const HORIZON_TOP = 345; // ring top + 0.65 ring - 0.08 horizon
+const HORIZON_TOP = 325; // ring top + 0.65 ring - 0.08 horizon
 const WORDMARK_SIZE = 84; // 0.2 of the ring
 const WORDMARK_GAP = 8; // 0.02 of the ring
+const MOTTO_SIZE = 26; // larger than the page's 0.05 so it reads in previews
+const MOTTO_GAP = 18;
 const SKY_GLOW = `radial-gradient(circle at 50% ${RING_TOP + RING / 2}px, rgba(214,224,255,0.16), rgba(214,224,255,0.04) 294px, rgba(214,224,255,0) 504px)`;
 
 const SEMIBOLD = 600 as const;
@@ -97,28 +99,16 @@ export default async function Image() {
             "0 0 12px rgba(255,255,255,0.45), 0 0 48px rgba(196,210,255,0.25)",
         }}
       />
-      <div
-        style={{
-          position: "absolute",
-          left: RING_LEFT,
-          top: RING_TOP,
-          width: RING,
-          height: RING,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: MOTTO_LIFT,
-          color: INK,
-          fontSize: MOTTO_SIZE,
-          fontWeight: SEMIBOLD,
-          lineHeight: 1.04,
-          letterSpacing: "-0.015em",
-        }}
+      <svg
+        aria-hidden="true"
+        fill="#ffffff"
+        height={RING}
+        style={{ position: "absolute", left: RING_LEFT, top: RING_TOP }}
+        viewBox={RING_VIEWBOX}
+        width={RING}
       >
-        <div>The Road</div>
-        <div>to Infinity</div>
-      </div>
+        <path d={RAIDHO_PATH} fillRule="evenodd" />
+      </svg>
       <svg
         aria-hidden="true"
         height={HORIZON_HEIGHT}
@@ -141,17 +131,34 @@ export default async function Image() {
           width: "100%",
           bottom: 0,
           display: "flex",
-          justifyContent: "center",
+          flexDirection: "column",
+          alignItems: "center",
           paddingTop: WORDMARK_GAP,
           backgroundColor: GROUND,
-          color: INK,
-          fontSize: WORDMARK_SIZE,
-          fontWeight: BOLD,
-          lineHeight: 1,
-          letterSpacing: "0.01em",
         }}
       >
-        ROADCORP
+        <div
+          style={{
+            color: INK,
+            fontSize: WORDMARK_SIZE,
+            fontWeight: BOLD,
+            lineHeight: 1,
+            letterSpacing: "0.01em",
+          }}
+        >
+          ROADCORP
+        </div>
+        <div
+          style={{
+            marginTop: MOTTO_GAP,
+            color: HAZE,
+            fontSize: MOTTO_SIZE,
+            fontWeight: SEMIBOLD,
+            letterSpacing: "0.01em",
+          }}
+        >
+          The Road to Infinity
+        </div>
       </div>
     </div>,
     { ...size, fonts }

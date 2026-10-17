@@ -1,5 +1,11 @@
-// The RoadCorp logo at page scale: the ring rises over the horizon with the
-// motto where the logo has its R, and the wordmark sits below the horizon.
+import {
+  RAIDHO_PATH,
+  RING_PATH,
+  RING_VIEWBOX,
+} from "@/components/roadcorp-mark";
+
+// The RoadCorp logo at page scale: the ring and the Raidho rune rise over a
+// horizon that spans the page, with the wordmark and motto below it.
 export function Hero() {
   return (
     <header className="scene">
@@ -7,23 +13,13 @@ export function Hero() {
         <svg
           aria-hidden="true"
           className="scene-ring"
-          viewBox="0 0 100 100"
+          fill="currentColor"
+          viewBox={RING_VIEWBOX}
           xmlns="http://www.w3.org/2000/svg"
         >
-          <circle
-            cx="50"
-            cy="50"
-            fill="none"
-            r="45.4"
-            stroke="currentColor"
-            strokeWidth="9.2"
-          />
+          <path d={RING_PATH} fillRule="evenodd" />
+          <path d={RAIDHO_PATH} fillRule="evenodd" />
         </svg>
-        <p className="scene-motto">
-          The Road
-          <br />
-          to Infinity
-        </p>
       </div>
 
       <svg
@@ -45,7 +41,10 @@ export function Hero() {
         />
       </svg>
 
-      <h1 className="scene-wordmark">RoadCorp</h1>
+      <div className="scene-lockup">
+        <h1 className="scene-wordmark">RoadCorp</h1>
+        <p className="scene-motto">The Road to Infinity</p>
+      </div>
     </header>
   );
 }
