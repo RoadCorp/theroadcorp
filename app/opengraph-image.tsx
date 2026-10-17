@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { RAIDHO_PATH, RING_VIEWBOX } from "@/components/roadcorp-mark";
+import { MARK, markSkyMarkup } from "@/components/roadcorp-mark";
 
 export const alt = "RoadCorp: The Road to Infinity";
 export const size = {
@@ -13,19 +13,36 @@ const GROUND = "#080d1c";
 const INK = "#eef0f6";
 const HAZE = "#8e98b5";
 
-// The homepage hero at a fixed size, using the same ratios as the .scene
-// rules in globals.css: every measure is a share of the ring diameter.
-const RING = 420;
-const RING_TOP = 60;
-const RING_LEFT = (size.width - RING) / 2;
-const RING_STROKE = 39; // 0.092 of the ring
-const HORIZON_HEIGHT = 101; // 0.24 of the ring
-const HORIZON_TOP = 325; // ring top + 0.65 ring - 0.08 horizon
-const WORDMARK_SIZE = 84; // 0.2 of the ring
-const WORDMARK_GAP = 8; // 0.02 of the ring
-const MOTTO_SIZE = 26; // larger than the page's 0.05 so it reads in previews
+// The homepage hero at a fixed size: K pixels per mark unit, with the
+// ring's top edge at MARK_TOP. The planet is the mark's own planet circle.
+const K = 4;
+const MARK_TOP = 34;
+const RING_TOP_UNITS = MARK.ring.cy - MARK.ring.r - MARK.stroke / 2;
+const toY = (units: number) => MARK_TOP + (units - RING_TOP_UNITS) * K;
+const CENTER_X = size.width / 2;
+const PLANET_Y = toY(MARK.planet.cy);
+const PLANET_R = MARK.planet.r * K;
+const HORIZON_BOTTOM = toY(
+  MARK.planet.cy - MARK.planet.r + MARK.horizonStroke / 2
+);
+const WORDMARK_SIZE = 84;
+const WORDMARK_GAP = 48;
+const MOTTO_SIZE = 26; // larger than the page's ratio so it reads in previews
 const MOTTO_GAP = 18;
-const SKY_GLOW = `radial-gradient(circle at 50% ${RING_TOP + RING / 2}px, rgba(214,224,255,0.16), rgba(214,224,255,0.04) 294px, rgba(214,224,255,0) 504px)`;
+const SKY_GLOW = `radial-gradient(circle at 50% ${toY(MARK.ring.cy)}px, rgba(214,224,255,0.16), rgba(214,224,255,0.04) 280px, rgba(214,224,255,0) 480px)`;
+const MARK_TRANSFORM = `translate(${CENTER_X} ${MARK_TOP}) scale(${K}) translate(${-MARK.ring.cx} ${-RING_TOP_UNITS})`;
+
+// The mark (with a blurred copy for its glow) and the planet as one SVG,
+// since the image renderer only draws finished SVG markup.
+const SCENE_SVG = [
+  `<svg xmlns="http://www.w3.org/2000/svg" width="${size.width}" height="${size.height}" viewBox="0 0 ${size.width} ${size.height}">`,
+  '<defs><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter></defs>',
+  `<g filter="url(#glow)" opacity="0.55" transform="${MARK_TRANSFORM}">${markSkyMarkup("og-glow", "#ffffff")}</g>`,
+  `<g transform="${MARK_TRANSFORM}">${markSkyMarkup("og-mark", "#ffffff")}</g>`,
+  `<circle cx="${CENTER_X}" cy="${PLANET_Y}" r="${PLANET_R}" fill="${GROUND}" stroke="#ffffff" stroke-width="${MARK.horizonStroke * K}"/>`,
+  "</svg>",
+].join("");
+const SCENE_SRC = `data:image/svg+xml;base64,${Buffer.from(SCENE_SVG).toString("base64")}`;
 
 const SEMIBOLD = 600 as const;
 const BOLD = 700 as const;
@@ -86,55 +103,24 @@ export default async function Image() {
         fontFamily: fonts ? "Overpass" : undefined,
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          left: RING_LEFT,
-          top: RING_TOP,
-          width: RING,
-          height: RING,
-          borderRadius: "50%",
-          border: `${RING_STROKE}px solid #ffffff`,
-          boxShadow:
-            "0 0 12px rgba(255,255,255,0.45), 0 0 48px rgba(196,210,255,0.25)",
-        }}
-      />
-      <svg
-        aria-hidden="true"
-        fill="#ffffff"
-        height={RING}
-        style={{ position: "absolute", left: RING_LEFT, top: RING_TOP }}
-        viewBox={RING_VIEWBOX}
-        width={RING}
-      >
-        <path d={RAIDHO_PATH} fillRule="evenodd" />
-      </svg>
-      <svg
-        aria-hidden="true"
-        height={HORIZON_HEIGHT}
-        preserveAspectRatio="none"
-        style={{ position: "absolute", left: 0, top: HORIZON_TOP }}
-        viewBox="0 0 1000 100"
+      {/* biome-ignore lint/performance/noImgElement: ImageResponse renders plain img elements */}
+      <img
+        alt=""
+        height={size.height}
+        src={SCENE_SRC}
+        style={{ position: "absolute", left: 0, top: 0 }}
         width={size.width}
-      >
-        <path d="M0 100Q500 -68 1000 100Z" fill={GROUND} />
-        <path
-          d="M0 96Q500 -80 1000 96L1000 100Q500 -68 0 100Z"
-          fill="#ffffff"
-        />
-      </svg>
+      />
       <div
         style={{
           position: "absolute",
           left: 0,
-          top: HORIZON_TOP + HORIZON_HEIGHT - 1,
+          top: HORIZON_BOTTOM,
           width: "100%",
-          bottom: 0,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           paddingTop: WORDMARK_GAP,
-          backgroundColor: GROUND,
         }}
       >
         <div
