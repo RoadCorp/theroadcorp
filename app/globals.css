@@ -305,6 +305,7 @@
 }
 .site-footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
   padding-block: 3rem 3.5rem;
@@ -314,4 +315,21 @@
 .site-footer-mark {
   width: 1.75rem;
   height: auto;
+}
+.site-footer-contact {
+  margin-left: auto;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color 150ms ease;
+}
+.site-footer-contact:hover {
+  text-decoration-color: var(--ink);
+}
+.site-footer-contact:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
