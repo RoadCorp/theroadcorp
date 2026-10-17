@@ -1,40 +1,159 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-export const alt = "Roadcorp - Building innovative products and solutions";
+export const alt = "RoadCorp: The Road to Infinity";
 export const size = {
   width: 1200,
   height: 630,
 };
 export const contentType = "image/png";
 
+const SKY = "#0e1630";
+const GROUND = "#080d1c";
+const INK = "#eef0f6";
+
+// The homepage hero at a fixed size, using the same ratios as the .scene
+// rules in globals.css: every measure is a share of the ring diameter.
+const RING = 420;
+const RING_TOP = 80;
+const RING_LEFT = (size.width - RING) / 2;
+const RING_STROKE = 39; // 0.092 of the ring
+const MOTTO_SIZE = 44; // 0.105 of the ring
+const MOTTO_LIFT = 29; // 0.07 of the ring
+const HORIZON_HEIGHT = 101; // 0.24 of the ring
+const HORIZON_TOP = 345; // ring top + 0.65 ring - 0.08 horizon
+const WORDMARK_SIZE = 84; // 0.2 of the ring
+const WORDMARK_GAP = 8; // 0.02 of the ring
+const SKY_GLOW = `radial-gradient(circle at 50% ${RING_TOP + RING / 2}px, rgba(214,224,255,0.16), rgba(214,224,255,0.04) 294px, rgba(214,224,255,0) 504px)`;
+
+const SEMIBOLD = 600 as const;
+const BOLD = 700 as const;
+
+const FONT_URL_PATTERN = /src: url\((.+?)\) format\('(opentype|truetype)'\)/;
+
+// Google Fonts serves TrueType when the request has no browser user agent.
+async function loadOverpass(
+  text: string,
+  weight: typeof SEMIBOLD | typeof BOLD
+) {
+  try {
+    const css = await fetch(
+      `https://fonts.googleapis.com/css2?family=Overpass:wght@${weight}&text=${encodeURIComponent(text)}`
+    ).then((res) => res.text());
+    const url = css.match(FONT_URL_PATTERN)?.[1];
+    if (!url) {
+      return null;
+    }
+    return await fetch(url).then((res) => res.arrayBuffer());
+  } catch {
+    return null;
+  }
+}
+
 export default async function Image() {
+  const [semibold, bold] = await Promise.all([
+    loadOverpass("The Road to Infinity", SEMIBOLD),
+    loadOverpass("ROADCORP", BOLD),
+  ]);
+  const fonts =
+    semibold && bold
+      ? [
+          {
+            name: "Overpass",
+            data: semibold,
+            style: "normal" as const,
+            weight: SEMIBOLD,
+          },
+          {
+            name: "Overpass",
+            data: bold,
+            style: "normal" as const,
+            weight: BOLD,
+          },
+        ]
+      : undefined;
+
   return new ImageResponse(
     <div
       style={{
-        height: "100%",
-        width: "100%",
+        position: "relative",
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#0a0a0a",
-        fontSize: 32,
-        fontWeight: 600,
+        width: "100%",
+        height: "100%",
+        backgroundColor: SKY,
+        backgroundImage: SKY_GLOW,
+        fontFamily: fonts ? "Overpass" : undefined,
       }}
     >
-      <div style={{ color: "#ffffff", marginBottom: 16 }}>Roadcorp</div>
       <div
         style={{
-          color: "#888888",
-          fontSize: 24,
-          textAlign: "center",
-          maxWidth: "80%",
+          position: "absolute",
+          left: RING_LEFT,
+          top: RING_TOP,
+          width: RING,
+          height: RING,
+          borderRadius: "50%",
+          border: `${RING_STROKE}px solid #ffffff`,
+          boxShadow:
+            "0 0 12px rgba(255,255,255,0.45), 0 0 48px rgba(196,210,255,0.25)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: RING_LEFT,
+          top: RING_TOP,
+          width: RING,
+          height: RING,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: MOTTO_LIFT,
+          color: INK,
+          fontSize: MOTTO_SIZE,
+          fontWeight: SEMIBOLD,
+          lineHeight: 1.04,
+          letterSpacing: "-0.015em",
         }}
       >
-        The Road to Infinity — building, shipping, iterating.
+        <div>The Road</div>
+        <div>to Infinity</div>
+      </div>
+      <svg
+        aria-hidden="true"
+        height={HORIZON_HEIGHT}
+        preserveAspectRatio="none"
+        style={{ position: "absolute", left: 0, top: HORIZON_TOP }}
+        viewBox="0 0 1000 100"
+        width={size.width}
+      >
+        <path d="M0 100Q500 -68 1000 100Z" fill={GROUND} />
+        <path
+          d="M0 96Q500 -80 1000 96L1000 100Q500 -68 0 100Z"
+          fill="#ffffff"
+        />
+      </svg>
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: HORIZON_TOP + HORIZON_HEIGHT - 1,
+          width: "100%",
+          bottom: 0,
+          display: "flex",
+          justifyContent: "center",
+          paddingTop: WORDMARK_GAP,
+          backgroundColor: GROUND,
+          color: INK,
+          fontSize: WORDMARK_SIZE,
+          fontWeight: BOLD,
+          lineHeight: 1,
+          letterSpacing: "0.01em",
+        }}
+      >
+        ROADCORP
       </div>
     </div>,
-    size
+    { ...size, fonts }
   );
 }

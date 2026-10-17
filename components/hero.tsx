@@ -1,26 +1,51 @@
-import Image from "next/image";
-
+// The RoadCorp logo at page scale: the ring rises over the horizon with the
+// motto where the logo has its R, and the wordmark sits below the horizon.
 export function Hero() {
   return (
-    <section className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-      <div className="flex flex-col items-center gap-8 sm:gap-10">
-        {/* Logo */}
-        <div className="scale-in logo-glow">
-          <Image
-            alt="Roadcorp logo"
-            className="h-20 w-20 sm:h-28 sm:w-28 lg:h-32 lg:w-32"
-            height={128}
-            priority
-            src="/logos/roadcorp-logo-dark.png"
-            width={128}
+    <header className="scene">
+      <div className="scene-sky">
+        <svg
+          aria-hidden="true"
+          className="scene-ring"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            fill="none"
+            r="45.4"
+            stroke="currentColor"
+            strokeWidth="9.2"
           />
-        </div>
-
-        {/* Motto */}
-        <h1 className="fade-up font-serif text-2xl font-normal leading-snug tracking-wide text-foreground text-balance sm:text-3xl lg:text-4xl [animation-delay:0.2s]">
-          The Road to Infinity
-        </h1>
+        </svg>
+        <p className="scene-motto">
+          The Road
+          <br />
+          to Infinity
+        </p>
       </div>
-    </section>
+
+      <svg
+        aria-hidden="true"
+        className="scene-horizon"
+        preserveAspectRatio="none"
+        viewBox="0 0 1000 100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          className="scene-ground"
+          d="M0 100Q500 -68 1000 100V104H0Z"
+          fill="currentColor"
+        />
+        <path
+          className="scene-horizon-line"
+          d="M0 96Q500 -80 1000 96L1000 100Q500 -68 0 100Z"
+          fill="currentColor"
+        />
+      </svg>
+
+      <h1 className="scene-wordmark">RoadCorp</h1>
+    </header>
   );
 }
