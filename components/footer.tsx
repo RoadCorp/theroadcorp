@@ -7,7 +7,11 @@ export function Footer() {
     <footer className="site-footer">
       <RoadcorpMark className="site-footer-mark" />
       <p>© {new Date().getFullYear()} RoadCorp</p>
-      <a className="site-footer-contact" href={`mailto:${CONTACT_EMAIL}`}>
+      <a
+        aria-label={`Email RoadCorp at ${CONTACT_EMAIL}`}
+        className="site-footer-contact"
+        href={`mailto:${CONTACT_EMAIL}`}
+      >
         {CONTACT_EMAIL}
       </a>
     </footer>
