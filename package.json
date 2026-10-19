@@ -8,6 +8,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "biome check .",
+    "lint:changed": "sh scripts/lint-changed.sh",
     "lint:fix": "biome check --write .",
     "format": "biome format --write ."
   },

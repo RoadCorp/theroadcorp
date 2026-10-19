@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/verify-gate.sh\" pnpm run lint:changed",
+            "timeout": 300
+          }
+        ]
+      }
+    ]
+  }
+}
