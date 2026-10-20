@@ -16,7 +16,7 @@ Done means evidence: report the commands you ran and what you observed. "It comp
 |---|---|
 | Hero (`components/hero.tsx`, `components/roadcorp-mark.tsx`) | The horizon mark renders with the Raidho-rune R and the ROADCORP wordmark; never dropped or replaced |
 | Project list (`components/project-list.tsx`) | Every project renders with its link; links resolve |
-| Footer (`components/footer.tsx`) | The mark, the year, and the contact link `mailto:contact@theroadcorp.com` with its aria-label |
+| Footer (`components/footer.tsx`) | The mark, the year, the contact link `mailto:contact@theroadcorp.com` with its aria-label, and the GitHub icon link to `github.com/RoadCorp`; at 375 px the email and icon wrap together, right-aligned |
 | Metadata (`app/layout.tsx`, `app/opengraph-image.tsx`, `app/icon.svg`) | `<title>`, description and OG image respond (`/opengraph-image`); favicon loads |
 | Styles (`app/globals.css`) | Light and dark mode both render; phone width (375 px) has no horizontal scroll |
 
