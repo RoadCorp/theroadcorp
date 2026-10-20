@@ -316,8 +316,31 @@
   width: 1.75rem;
   height: auto;
 }
-.site-footer-contact {
+.site-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   margin-left: auto;
+}
+.site-footer-github {
+  display: inline-flex;
+  padding: 0.25rem;
+  color: var(--haze);
+  transition: color 150ms ease;
+}
+.site-footer-github svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.site-footer-github:hover {
+  color: var(--ink);
+}
+.site-footer-github:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.site-footer-contact {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--line);

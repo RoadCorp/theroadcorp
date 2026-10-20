@@ -1,4 +1,11 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["ultracite"]
+  "extends": ["ultracite"],
+  "overrides": [
+    {
+      // Tailwind v4 directives (@theme, @custom-variant, @apply); Biome 2.2 can't parse them.
+      "includes": ["app/globals.css"],
+      "linter": { "rules": { "suspicious": { "noUnknownAtRules": "off" } } }
+    }
+  ]
 }
