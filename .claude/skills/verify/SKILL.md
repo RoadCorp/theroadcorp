@@ -8,7 +8,7 @@ description: Prove a change to the RoadCorp website works by running it and look
 Done means evidence: report the commands you ran and what you observed. "It compiles" or "lint passes" is not proof the behaviour changed.
 
 ## 1. Run it
-- Start the dev server with the `roadcorp-dev` preview (`.claude/launch.json`, port 3200) and open `/`.
+- Start the dev server with the `roadcorp-dev` preview (`.claude/launch.json`, port 7001, pinned in the `dev` script) and open `/`.
 - Check the browser console and the server log for errors.
 
 ## 2. Check what the change touched
@@ -18,7 +18,7 @@ Done means evidence: report the commands you ran and what you observed. "It comp
 | Project list (`components/project-list.tsx`) | Every project renders with its link; links resolve |
 | Footer (`components/footer.tsx`) | The mark, the year, the contact link `mailto:contact@theroadcorp.com` with its aria-label, and the GitHub icon link to `github.com/RoadCorp`; at 375 px the email and icon wrap together, right-aligned |
 | Metadata (`app/layout.tsx`, `app/opengraph-image.tsx`, `app/icon.svg`) | `<title>`, description and OG image respond (`/opengraph-image`); favicon loads |
-| Styles (`app/globals.css`) | Light and dark mode both render; phone width (375 px) has no horizontal scroll |
+| Styles (`app/globals.css`) | The night-sky theme renders (the site has no light mode); phone width (375 px) has no horizontal scroll |
 
 Check the rows your change touched, plus the page as a whole at desktop and phone width.
 
