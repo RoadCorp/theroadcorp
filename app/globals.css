@@ -107,84 +107,67 @@
   }
 }
 
-/* ── Hero: the logo rising over the asphalt horizon ── */
-/* --d is the ring's outer diameter and --k one mark unit (the ring is 101
-   units across in components/roadcorp-mark.tsx), so the hero keeps the
-   mark's exact geometry from phone to desktop. */
+/* ── Hero: the Carved Planet emblem in the asphalt sky ── */
 .scene {
-  --d: min(76vw, 48svh, 540px);
-  --k: calc(var(--d) / 101);
-  --sky-top: max(7svh, 2.25rem);
+  --emblem: min(58vw, 34svh, 296px);
+  --sky-top: max(8svh, 3.25rem);
   position: relative;
   overflow: hidden;
-  padding-top: var(--sky-top);
+  padding: var(--sky-top) 1rem 2.25rem;
   border-top: 2px solid var(--marking);
-  background-color: var(--sky);
-  background-image: linear-gradient(180deg, #101012 0%, var(--sky) 65%);
+  background-color: var(--ground);
+  background-image: linear-gradient(
+    180deg,
+    #101012 0%,
+    var(--sky) 38%,
+    var(--ground) 100%
+  );
 }
 .scene::before {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    circle at 50% calc(var(--sky-top) + var(--k) * 54),
-    rgb(255 255 255 / 12%),
-    var(--marking-glow) calc(var(--d) * 0.62),
-    transparent calc(var(--d) * 1.18)
+    circle at 50% calc(var(--sky-top) + var(--emblem) * 0.5),
+    rgb(255 255 255 / 11%),
+    var(--marking-glow) calc(var(--emblem) * 0.88),
+    transparent calc(var(--emblem) * 1.8)
   );
   pointer-events: none;
 }
-/* Wider than a phone screen, so it is centered by translation. */
-.scene-sky {
+.scene-emblem {
   position: relative;
-  left: 50%;
-  width: calc(var(--k) * 160);
-  height: calc(var(--k) * 100);
-  translate: -50% 0;
+  z-index: 2;
+  width: var(--emblem);
+  height: var(--emblem);
+  margin-inline: auto;
 }
 .scene-mark {
   display: block;
   width: 100%;
   height: 100%;
   color: var(--ink);
-  filter: drop-shadow(0 0 calc(var(--d) * 0.024) rgb(255 255 255 / 38%))
-    drop-shadow(0 0 calc(var(--d) * 0.09) rgb(255 255 255 / 14%));
-}
-/* The mark's planet (radius 325 units, horizon line 3 units). On very wide
-   screens it grows flatter so its edges never show; the top stays put. */
-.scene-planet {
-  position: absolute;
-  z-index: 1;
-  top: calc(var(--sky-top) + var(--k) * 83.5);
-  left: 50%;
-  width: max(calc(var(--k) * 653), 160vw);
-  aspect-ratio: 1;
-  translate: -50% 0;
-  border-radius: 50%;
-  background-color: var(--ground);
-  box-shadow:
-    inset 0 0 0 calc(var(--k) * 3) var(--ink),
-    0 0 calc(var(--d) * 0.03) rgb(255 255 255 / 22%),
-    0 0 calc(var(--d) * 0.09) rgb(245 197 24 / 18%);
+  filter: drop-shadow(0 0 calc(var(--emblem) * 0.03) rgb(255 255 255 / 24%))
+    drop-shadow(0 0 calc(var(--emblem) * 0.12) rgb(245 197 24 / 14%));
 }
 .scene-lockup {
   position: relative;
   z-index: 2;
-  padding: calc(var(--k) * 6) 1rem 2.25rem;
+  margin-top: clamp(1.75rem, 3.6svh, 2.5rem);
   text-align: center;
   color: var(--ink);
 }
 .scene-wordmark {
   margin: 0;
   text-transform: uppercase;
-  font-size: calc(var(--d) * 0.2);
+  font-size: clamp(2.5rem, 8.2vw, 5.25rem);
   font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 .scene-motto {
-  margin-top: calc(var(--d) * 0.035);
-  font-size: max(1.0625rem, calc(var(--d) * 0.046));
+  margin-top: clamp(0.625rem, 1.5svh, 1rem);
+  font-size: clamp(1.0625rem, 2.1vw, 1.375rem);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--haze);
@@ -195,7 +178,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.45rem;
-  margin-top: 2rem;
+  margin-top: 2.25rem;
 }
 .scene-dash {
   width: 3px;
@@ -211,10 +194,10 @@
   opacity: 0.48;
 }
 
-/* One orchestrated moment: the mark rises over the horizon. */
+/* One orchestrated moment: the emblem rises out of the asphalt sky. */
 @keyframes mark-rise {
   from {
-    transform: translateY(18%);
+    transform: translateY(10%);
     opacity: 0;
   }
 }
@@ -230,14 +213,14 @@
 }
 @media (prefers-reduced-motion: no-preference) {
   .scene-mark {
-    animation: mark-rise 1.6s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: mark-rise 1.2s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   .scene::before {
-    animation: sky-light 2s 0.4s ease-out both;
+    animation: sky-light 1.8s 0.3s ease-out both;
   }
   .scene-motto,
   .scene-centerline {
-    animation: motto-in 0.9s 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: motto-in 0.8s 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
 
@@ -469,8 +452,8 @@
   color: var(--haze);
 }
 .site-footer-mark {
-  width: 1.75rem;
-  height: auto;
+  width: 1.625rem;
+  height: 1.625rem;
   color: var(--ink);
 }
 .site-footer-links {

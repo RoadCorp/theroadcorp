@@ -1,22 +1,14 @@
-import { MARK, MarkSky } from "@/components/roadcorp-mark";
+import { RoadcorpMark } from "@/components/roadcorp-mark";
 
-// The RoadCorp logo at page scale: the ring and the Raidho rune rise over a
-// planet whose horizon spans the page, with the wordmark, motto and a dashed
-// yellow highway centerline leading into the projects below.
+// The RoadCorp hero: the Carved Planet emblem centered in the asphalt sky,
+// leading straight through the wordmark and motto down a dashed yellow
+// highway centerline into the projects directory below.
 export function Hero() {
   return (
     <header className="scene">
-      <div className="scene-sky">
-        <svg
-          aria-hidden="true"
-          className="scene-mark"
-          viewBox={MARK.skyViewBox}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <MarkSky id="hero-mark" />
-        </svg>
+      <div className="scene-emblem">
+        <RoadcorpMark className="scene-mark" id="hero-mark" />
       </div>
-      <div aria-hidden="true" className="scene-planet" />
       <div className="scene-lockup">
         <h1 className="scene-wordmark">RoadCorp</h1>
         <p className="scene-motto">The Road to Infinity</p>
