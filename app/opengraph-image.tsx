@@ -104,12 +104,7 @@ export default async function Image() {
         }}
       />
       {/* biome-ignore lint/performance/noImgElement: ImageResponse renders plain img elements */}
-      <img
-        alt=""
-        height={EMBLEM_SIZE}
-        src={EMBLEM_SRC}
-        width={EMBLEM_SIZE}
-      />
+      <img alt="" height={EMBLEM_SIZE} src={EMBLEM_SRC} width={EMBLEM_SIZE} />
       <div
         style={{
           marginTop: WORDMARK_GAP,
