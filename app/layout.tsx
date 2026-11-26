@@ -72,8 +72,11 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: "#0a0a0b",
-  colorScheme: "dark",
+  colorScheme: "dark light",
 };
+
+const themeInitScript =
+  'try{if(localStorage.getItem("roadcorp-theme")==="light"){var r=document.documentElement;r.dataset.theme="light";r.classList.remove("dark");var m=document.querySelector(\'meta[name="theme-color"]\');if(m)m.setAttribute("content","#f6f5f0");}}catch(e){}';
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -114,10 +117,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="dark" dir="ltr" lang="en">
+    <html className="dark" dir="ltr" lang="en" suppressHydrationWarning>
       <body
         className={`${overpass.variable} ${overpassMono.variable} font-sans antialiased`}
       >
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static pre-paint theme restoration
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
         <script
           // biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD built from constants
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
