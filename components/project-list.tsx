@@ -12,7 +12,7 @@ type Project = {
 
 const projects: Project[] = [
   {
-    name: "Avenews",
+    name: "AveNews",
     logo: "/projects/avenews.png",
     href: "https://www.avenews.am",
     description: "News for the curious, in English and Armenian.",
@@ -25,16 +25,15 @@ const projects: Project[] = [
   },
   {
     name: "Bagaran",
-    logo: "/projects/bagaran.png",
+    logo: "/projects/bagaran.svg",
     href: "https://www.bagaranagency.com",
-    description:
-      "Websites and writing for Armenian businesses connecting with the world.",
+    description: "Websites, content and business systems.",
   },
   {
     name: "Lyóvson.com",
     logo: "/projects/lyovson.png",
     href: "https://www.lyovson.com",
-    description: "Posts, notes and projects by Rafa and Jess Lyóvson.",
+    description: "Writing, projects and research by Rafa and Jess Lyóvson.",
   },
   {
     name: "Concerned EU",
