@@ -10,6 +10,10 @@ const LIGHT_THEME_COLOR = "#f6f5f0";
 
 type Theme = "dark" | "light";
 
+type TransitionDocument = Document & {
+  startViewTransition?: (update: () => void) => { finished: Promise<void> };
+};
+
 function readTheme(): Theme {
   if (typeof document === "undefined") {
     return "dark";
@@ -46,6 +50,22 @@ function applyTheme(next: Theme) {
   }
 
   window.dispatchEvent(new CustomEvent<Theme>(THEME_EVENT, { detail: next }));
+}
+
+function switchThemeGracefully(next: Theme) {
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  const doc = document as TransitionDocument;
+
+  if (!reducedMotion && typeof doc.startViewTransition === "function") {
+    doc.startViewTransition(() => {
+      applyTheme(next);
+    });
+    return;
+  }
+
+  applyTheme(next);
 }
 
 export function ThemeMarkButton({
@@ -89,8 +109,7 @@ export function ThemeMarkButton({
       aria-label={label}
       aria-pressed={theme === "light"}
       className={buttonClassName}
-      onClick={() => applyTheme(nextTheme)}
-      title={label}
+      onClick={() => switchThemeGracefully(nextTheme)}
       type="button"
     >
       <RoadcorpMark className={markClassName} id={id} />
