@@ -15,7 +15,7 @@ const siteUrl =
     : "http://localhost:3000");
 
 const description =
-  "RoadCorp is the company behind Avenews, Baylus, Bagaran, Lyóvson.com and Concerned EU. The Road to Infinity.";
+  "RoadCorp is the company behind AveNews, Baylus, Bagaran, Lyóvson.com and Concerned EU. The Road to Infinity.";
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   description,
   keywords: [
     "RoadCorp",
-    "Avenews",
+    "AveNews",
     "Baylus",
     "Bagaran",
     "Lyóvson",
