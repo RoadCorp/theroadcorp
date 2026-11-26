@@ -1,10 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Overpass } from "next/font/google";
+import { Overpass, Overpass_Mono } from "next/font/google";
 import "./globals.css";
 
 // Overpass descends from Highway Gothic, the US road-sign face.
 const overpass = Overpass({
   variable: "--font-overpass",
+  subsets: ["latin"],
+});
+
+const overpassMono = Overpass_Mono({
+  variable: "--font-overpass-mono",
   subsets: ["latin"],
 });
 
@@ -66,7 +71,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0e1630",
+  themeColor: "#0a0a0b",
   colorScheme: "dark",
 };
 
@@ -110,7 +115,9 @@ export default function RootLayout({
 }>) {
   return (
     <html className="dark" dir="ltr" lang="en">
-      <body className={`${overpass.variable} font-sans antialiased`}>
+      <body
+        className={`${overpass.variable} ${overpassMono.variable} font-sans antialiased`}
+      >
         <script
           // biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD built from constants
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
