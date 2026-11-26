@@ -31,16 +31,17 @@ const WORDMARK_GAP = 42;
 const MOTTO_SIZE = 26; // larger than the page's ratio so it reads in previews
 const MOTTO_GAP = 16;
 const STRIPE_GAP = 26;
-const SKY_GLOW = `radial-gradient(circle at 50% ${toY(MARK.ring.cy)}px, rgba(255,255,255,0.12), rgba(245,197,24,0.04) 280px, rgba(255,255,255,0) 480px)`;
+const SKY_GLOW = `radial-gradient(circle at 50% ${toY(MARK.ring.cy)}px, rgba(255,255,255,0.13), rgba(245,197,24,0.09) 270px, rgba(245,197,24,0) 520px)`;
 const MARK_TRANSFORM = `translate(${CENTER_X} ${MARK_TOP}) scale(${K}) translate(${-MARK.ring.cx} ${-RING_TOP_UNITS})`;
 
 // The mark (with a blurred copy for its glow) and the planet as one SVG,
 // since the image renderer only draws finished SVG markup.
 const SCENE_SVG = [
   `<svg xmlns="http://www.w3.org/2000/svg" width="${size.width}" height="${size.height}" viewBox="0 0 ${size.width} ${size.height}">`,
-  '<defs><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter></defs>',
+  '<defs><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter><filter id="horizon-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8"/></filter></defs>',
   `<g filter="url(#glow)" opacity="0.45" transform="${MARK_TRANSFORM}">${markSkyMarkup("og-glow", INK)}</g>`,
   `<g transform="${MARK_TRANSFORM}">${markSkyMarkup("og-mark", INK)}</g>`,
+  `<circle cx="${CENTER_X}" cy="${PLANET_Y}" r="${PLANET_R}" fill="none" filter="url(#horizon-glow)" opacity="0.45" stroke="${MARKING}" stroke-width="${MARK.horizonStroke * K}"/>`,
   `<circle cx="${CENTER_X}" cy="${PLANET_Y}" r="${PLANET_R}" fill="${GROUND}" stroke="${INK}" stroke-width="${MARK.horizonStroke * K}"/>`,
   "</svg>",
 ].join("");
@@ -105,6 +106,17 @@ export default async function Image() {
         fontFamily: fonts ? "Overpass" : undefined,
       }}
     >
+      {/* Top highway-yellow trim bar */}
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: "100%",
+          height: 6,
+          backgroundColor: MARKING,
+        }}
+      />
       {/* biome-ignore lint/performance/noImgElement: ImageResponse renders plain img elements */}
       <img
         alt=""

@@ -68,7 +68,7 @@ export function ProjectList() {
           Projects
         </h2>
         <span aria-hidden="true" className="projects-count">
-          {routeCount} routes
+          <span className="projects-count-num">{routeCount}</span> routes
         </span>
       </div>
       <ul className="projects-list">
