@@ -1,4 +1,4 @@
-import { RoadcorpMark } from "@/components/roadcorp-mark";
+import { ThemeMarkButton } from "@/components/theme-mark-button";
 
 const CONTACT_EMAIL = "contact@theroadcorp.com";
 const GITHUB_URL = "https://github.com/RoadCorp";
@@ -6,7 +6,11 @@ const GITHUB_URL = "https://github.com/RoadCorp";
 export function Footer() {
   return (
     <footer className="site-footer">
-      <RoadcorpMark className="site-footer-mark" />
+      <ThemeMarkButton
+        buttonClassName="site-footer-mark-btn"
+        id="footer-mark"
+        markClassName="site-footer-mark"
+      />
       <p>© {new Date().getFullYear()} RoadCorp</p>
       <div className="site-footer-links">
         <a

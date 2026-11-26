@@ -6,10 +6,12 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <main className="ground">
-        <ProjectList />
+      <div className="ground">
+        <main>
+          <ProjectList />
+        </main>
         <Footer />
-      </main>
+      </div>
     </>
   );
 }
