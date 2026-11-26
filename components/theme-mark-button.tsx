@@ -17,7 +17,7 @@ function readTheme(): Theme {
   return document.documentElement.dataset.theme === "light" ? "light" : "dark";
 }
 
-function applyTheme(next: Theme) {
+function applyDocumentTheme(next: Theme) {
   const root = document.documentElement;
   if (next === "light") {
     root.dataset.theme = "light";
@@ -34,6 +34,10 @@ function applyTheme(next: Theme) {
       next === "light" ? LIGHT_THEME_COLOR : DARK_THEME_COLOR
     );
   }
+}
+
+function applyTheme(next: Theme) {
+  applyDocumentTheme(next);
 
   try {
     localStorage.setItem(STORAGE_KEY, next);
@@ -61,8 +65,20 @@ export function ThemeMarkButton({
       const detail = (event as CustomEvent<Theme>).detail;
       setTheme(detail === "light" ? "light" : readTheme());
     };
+    const onStorage = (event: StorageEvent) => {
+      if (event.key !== STORAGE_KEY) {
+        return;
+      }
+      const next: Theme = event.newValue === "light" ? "light" : "dark";
+      applyDocumentTheme(next);
+      setTheme(next);
+    };
     window.addEventListener(THEME_EVENT, onThemeChange);
-    return () => window.removeEventListener(THEME_EVENT, onThemeChange);
+    window.addEventListener("storage", onStorage);
+    return () => {
+      window.removeEventListener(THEME_EVENT, onThemeChange);
+      window.removeEventListener("storage", onStorage);
+    };
   }, []);
 
   const nextTheme: Theme = theme === "light" ? "dark" : "light";
@@ -71,6 +87,7 @@ export function ThemeMarkButton({
   return (
     <button
       aria-label={label}
+      aria-pressed={theme === "light"}
       className={buttonClassName}
       onClick={() => applyTheme(nextTheme)}
       title={label}
