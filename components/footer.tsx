@@ -16,7 +16,12 @@ export function Footer() {
         >
           {CONTACT_EMAIL}
         </a>
-        <a className="site-footer-github" href={GITHUB_URL}>
+        <a
+          className="site-footer-github"
+          href={GITHUB_URL}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <span className="sr-only">RoadCorp on GitHub</span>
           <svg
             aria-hidden="true"
