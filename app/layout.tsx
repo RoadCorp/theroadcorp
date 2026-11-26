@@ -86,7 +86,7 @@ const structuredData = {
       "@id": `${siteUrl}/#organization`,
       name: "RoadCorp",
       url: siteUrl,
-      logo: `${siteUrl}/apple-icon`,
+      logo: `${siteUrl}/icon-maskable-512.png`,
       email: "contact@theroadcorp.com",
       slogan: "The Road to Infinity",
       description,
